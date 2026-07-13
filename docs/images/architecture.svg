@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="720" viewBox="0 0 920 720" font-family="'Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic','Meiryo',sans-serif">
+  <rect width="920" height="720" fill="#fafafa" rx="12"/>
+
+  <defs>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#8a8a8a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#d98a3a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- app/layout.tsx -->
+  <rect x="320" y="28" width="280" height="62" rx="10" fill="#f4efe6" stroke="#b8ab90" stroke-width="1.5"/>
+  <text x="460" y="54" text-anchor="middle" font-size="15" font-weight="bold" fill="#4a4437">app/layout.tsx</text>
+  <text x="460" y="75" text-anchor="middle" font-size="12" fill="#7a725f">HTML枠・フォント・共通スタイル</text>
+
+  <line x1="460" y1="92" x2="460" y2="124" stroke="#8a8a8a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+  <text x="472" y="112" font-size="11" fill="#888">{children}</text>
+
+  <!-- app/page.tsx -->
+  <rect x="290" y="128" width="340" height="68" rx="10" fill="#edeffb" stroke="#7d86d8" stroke-width="1.5"/>
+  <text x="460" y="156" text-anchor="middle" font-size="15" font-weight="bold" fill="#3d47a8">app/page.tsx</text>
+  <text x="460" y="177" text-anchor="middle" font-size="12" fill="#5a62b0">共有状態: キー・スケール・Triads/7th</text>
+
+  <!-- props fan-out -->
+  <line x1="330" y1="196" x2="110" y2="264" stroke="#9a9a9a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+  <line x1="395" y1="196" x2="285" y2="264" stroke="#9a9a9a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+  <line x1="460" y1="196" x2="460" y2="264" stroke="#9a9a9a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+  <line x1="525" y1="196" x2="635" y2="264" stroke="#9a9a9a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+  <line x1="590" y1="196" x2="810" y2="264" stroke="#9a9a9a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+
+  <!-- callback (representative) -->
+  <path d="M220 266 C 176 226, 214 190, 286 176" fill="none" stroke="#d98a3a" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#arrowOrange)"/>
+
+  <!-- components row -->
+  <rect x="28" y="268" width="160" height="62" rx="10" fill="#e6f3f3" stroke="#4d9d9d" stroke-width="1.5"/>
+  <text x="108" y="294" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#226b6b">ChromaticStrip</text>
+  <text x="108" y="313" text-anchor="middle" font-size="11" fill="#3f8585">12音の選択</text>
+
+  <rect x="204" y="268" width="160" height="62" rx="10" fill="#e7f4ec" stroke="#46a06f" stroke-width="1.5"/>
+  <text x="284" y="294" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1f6b44">ScaleControls</text>
+  <text x="284" y="313" text-anchor="middle" font-size="11" fill="#3f8560">キー/スケール操作</text>
+
+  <rect x="380" y="268" width="160" height="62" rx="10" fill="#fdeef2" stroke="#d1728e" stroke-width="1.5"/>
+  <text x="460" y="294" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#a34059">NoteList</text>
+  <text x="460" y="313" text-anchor="middle" font-size="11" fill="#b96a80">構成音と度数</text>
+
+  <rect x="556" y="268" width="160" height="62" rx="10" fill="#f3edfa" stroke="#9a6fd0" stroke-width="1.5"/>
+  <text x="636" y="294" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#6b3fa8">DiatonicChords</text>
+  <text x="636" y="313" text-anchor="middle" font-size="11" fill="#8a63b8">コード一覧・再生</text>
+
+  <rect x="732" y="268" width="160" height="62" rx="10" fill="#fdf1e6" stroke="#d3924e" stroke-width="1.5"/>
+  <text x="812" y="294" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#9c5f1e">Fretboard</text>
+  <text x="812" y="313" text-anchor="middle" font-size="11" fill="#b07c40">指板・演奏・検索</text>
+
+  <!-- components -> lib arrows -->
+  <line x1="108" y1="332" x2="200" y2="416" stroke="#9a9a9a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+  <line x1="284" y1="332" x2="266" y2="416" stroke="#9a9a9a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+  <line x1="770" y1="332" x2="388" y2="416" stroke="#9a9a9a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+  <line x1="636" y1="332" x2="620" y2="416" stroke="#9a9a9a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+  <line x1="830" y1="332" x2="702" y2="416" stroke="#9a9a9a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+
+  <!-- lib boxes -->
+  <rect x="110" y="420" width="310" height="70" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1.5"/>
+  <text x="265" y="448" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">lib/music-theory.ts</text>
+  <text x="265" y="469" text-anchor="middle" font-size="11.5" fill="#777">音の計算（スケール・コード・フォーム）</text>
+
+  <rect x="500" y="420" width="310" height="70" rx="10" fill="#ffffff" stroke="#666666" stroke-width="1.5"/>
+  <text x="655" y="448" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">lib/audio.ts</text>
+  <text x="655" y="469" text-anchor="middle" font-size="11.5" fill="#777">音の合成（Karplus–Strong）・再生制御</text>
+
+  <text x="460" y="514" text-anchor="middle" font-size="11" fill="#999">※ 矢印は主な依存関係のみ表示（Reactに依存しない純粋モジュール）</text>
+
+  <!-- Web Audio API -->
+  <line x1="655" y1="490" x2="655" y2="544" stroke="#8a8a8a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+  <rect x="545" y="548" width="220" height="58" rx="10" fill="#efefef" stroke="#999999" stroke-width="1.5"/>
+  <text x="655" y="573" text-anchor="middle" font-size="13" font-weight="bold" fill="#444">Web Audio API</text>
+  <text x="655" y="592" text-anchor="middle" font-size="11" fill="#777">ブラウザ内蔵の音声出力</text>
+
+  <!-- legend -->
+  <line x1="120" y1="656" x2="170" y2="656" stroke="#9a9a9a" stroke-width="1.4" marker-end="url(#arrowGray)"/>
+  <text x="180" y="660" font-size="12" fill="#555">props・関数呼び出し（値が下へ）</text>
+  <line x1="470" y1="656" x2="520" y2="656" stroke="#d98a3a" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#arrowOrange)"/>
+  <text x="530" y="660" font-size="12" fill="#555">コールバック（操作イベントが上へ）</text>
+</svg>
