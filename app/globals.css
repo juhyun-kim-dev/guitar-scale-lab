@@ -1,49 +1,730 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --background: #eef1f4;
+  --surface: #fbfcfd;
+  --surface-soft: #e7ebef;
+  --text: #22262b;
+  --muted: #68727e;
+  --line: rgba(34, 38, 43, 0.12);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  --accent: #d9a441;
+  --accent-strong: #9a6b1a;
+  --accent-soft: rgba(217, 164, 65, 0.15);
+  --accent-ink: #241703;
 
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-sans: var(--font-geist-sans), "Apple SD Gothic Neo",
+    "Malgun Gothic", sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
+}
+
+body {
   margin: 0;
+
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-sans);
 }
 
-a {
+button,
+select {
+  font: inherit;
+}
+
+.page {
+  width: min(1360px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 64px 0 96px;
+}
+
+.hero {
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+
+  color: var(--accent-strong);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 12px;
+  font-size: clamp(36px, 6vw, 60px);
+  font-weight: 650;
+  letter-spacing: -0.04em;
+}
+
+.description {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.chromaticStrip {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.chromaticNote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  min-height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+
+  color: rgba(34, 38, 43, 0.4);
+  padding: 8px 0;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.chromaticNote .flatName {
+  font-size: 10px;
+  opacity: 0.55;
+}
+
+.chromaticNote:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.chromaticNote:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.chromaticNote.inScale {
+  background: var(--surface);
+  border-color: rgba(34, 38, 43, 0.25);
+  color: var(--text);
+}
+
+.chromaticNote.root {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+}
+
+.controlCard,
+.resultCard,
+.chordCard,
+.fretboardCard {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.controlCard {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+  margin-bottom: 20px;
+  padding: 22px 24px;
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label,
+.labelText {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-soft);
+  color: var(--text);
+  padding: 12px 14px;
+  cursor: pointer;
+}
+
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.buttonGroup button {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  padding: 12px 18px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.buttonGroup button:hover {
+  border-color: var(--accent);
+}
+
+.buttonGroup button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.buttonGroup button.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 650;
+}
+
+.resultCard {
+  padding: 26px 24px;
+}
+
+.resultHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.resultHeader h2 {
+  margin-bottom: 0;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+}
+
+.scaleBadge {
+  border: 1px solid rgba(154, 107, 26, 0.35);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  padding: 7px 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.noteList {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.noteItem {
+  display: flex;
+  min-height: 88px;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-soft);
+  padding: 12px 14px;
+}
+
+.noteItem.rootNote {
+  border-color: rgba(186, 117, 23, 0.5);
+  background: var(--accent-soft);
+}
+
+.degree {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.noteItem strong {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.noteItem.rootNote strong {
+  color: var(--accent-strong);
+}
+
+.chordCard {
+  margin-top: 20px;
+  padding: 26px 24px;
+}
+
+.chordList {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.chordItem {
+  display: flex;
+  min-height: 104px;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-soft);
+  padding: 12px 14px;
+
+  text-align: left;
   color: inherit;
-  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.08s;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.chordItem:hover {
+  border-color: var(--accent);
+}
+
+.chordItem:active {
+  transform: scale(0.98);
+}
+
+.chordItem:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.chordItem.tonicChord {
+  border-color: rgba(186, 117, 23, 0.5);
+  background: var(--accent-soft);
+}
+
+.chordItemTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.chordRoman {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.chordQuality {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chordName {
+  font-family: var(--font-mono);
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.chordItem.tonicChord .chordName {
+  color: var(--accent-strong);
+}
+
+.chordTones {
+  margin-top: auto;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.fretboardCard {
+  margin-top: 20px;
+  padding: 26px 24px;
+}
+
+.fretboardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.fretboardHeader h2 {
+  margin-bottom: 0;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+}
+
+.fretboardHint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: right;
+}
+
+.fretboardActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.fretboardButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px 14px;
+  flex-wrap: wrap;
+}
+
+.volumeControl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 8px;
+}
+
+.volumeControl input[type="range"] {
+  width: 96px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.volumeControl input[type="range"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.volumeLabel {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.volumeValue {
+  min-width: 42px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-align: right;
+}
+
+.strumButton {
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 10px 20px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.08s, opacity 0.15s;
+}
+
+.strumButton:hover:not(:disabled) {
+  background: #c69433;
+}
+
+.strumButton:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.strumButton:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+.clearButton {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, opacity 0.15s;
+}
+
+.clearButton:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.clearButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.strumButton:disabled,
+.clearButton:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.chordFinder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-soft);
+}
+
+.finderLabel {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  margin-right: 4px;
+}
+
+.chordFinder select {
+  width: auto;
+  min-width: 90px;
+  padding: 9px 12px;
+  background: var(--surface);
+}
+
+.finderNotice {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.buttonGroup.small button {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.fretboardScroll {
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.fretboard {
+  min-width: 1080px;
+  border: 1px solid #4a3117;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(0, 0, 0, 0.28)
+    ),
+    linear-gradient(90deg, #3a2411, #2e1c0c 35%, #372310 70%, #2b1a0b);
+}
+
+.fretNumberRow,
+.stringRow {
+  display: grid;
+  grid-template-columns: 160px repeat(12, 1fr);
+}
+
+.fretNumberRow {
+  background: #1a130a;
+
+  color: #a2937d;
+}
+
+.fretNumber,
+.stringLabelSpacer {
+  display: flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(236, 227, 210, 0.08);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.stringRow {
+  min-height: 62px;
+}
+
+.stringLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 0 14px;
+  border-right: 2px solid #caa05c;
+  background: #191108;
+  color: #d8c29a;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.fretCell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid #8f7444;
+  border-bottom: 1px solid rgba(236, 210, 170, 0.18);
+}
+
+.stringRow:last-child .fretCell {
+  border-bottom: 0;
+}
+
+.noteMarker {
+  display: flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(236, 227, 210, 0.22);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, transform 0.08s;
+}
+
+.noteMarker:hover {
+  color: #ece3d2;
+}
+
+.noteMarker:active {
+  transform: scale(0.88);
+}
+
+.noteMarker:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.noteMarker.inScale {
+  background: #ece3d2;
+  color: #3a2711;
+}
+
+.noteMarker.root {
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  box-shadow: 0 0 0 4px rgba(217, 164, 65, 0.25);
+}
+
+.openNoteMarker {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(216, 194, 154, 0.5);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, transform 0.08s;
+}
+
+.openNoteMarker:hover {
+  color: #ece3d2;
+}
+
+.openNoteMarker:active {
+  transform: scale(0.88);
+}
+
+.openNoteMarker:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.openNoteMarker.inScale {
+  background: #ece3d2;
+  color: #3a2711;
+}
+
+.openNoteMarker.root {
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  box-shadow: 0 0 0 4px rgba(217, 164, 65, 0.25);
+}
+
+.noteMarker.selected,
+.openNoteMarker.selected {
+  background: #2f9d85;
+  color: #04211a;
+  font-weight: 700;
+  box-shadow: 0 0 0 2px #2e1c0c, 0 0 0 4px #8fd8c6;
+}
+
+.stringLabel + .fretCell {
+  border-left: 5px solid #e6cf9d;
+}
+
+.stringLabelSpacer + .fretNumber {
+  border-left: 5px solid #e6cf9d;
+}
+
+@media (max-width: 700px) {
+  .page {
+    padding: 40px 0 64px;
+  }
+
+  .controlCard {
+    grid-template-columns: 1fr;
+  }
+
+  .chromaticStrip {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .noteList {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .chordList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fretboardCard {
+    padding: 20px;
+  }
+
+  .fretboardHeader {
+    flex-direction: column;
+  }
+
+  .fretboardHint {
+    text-align: left;
+  }
+
+  .fretboardActions {
+    align-items: flex-start;
+  }
+
+  .fretboardButtons {
+    flex-wrap: wrap;
   }
 }
