@@ -8,7 +8,9 @@
 
 ## 画面イメージ
 
-![Guitar Scale Lab の画面](./docs/images/guitar-scale-lab.png)
+![Guitar Scale Lab - C Major](./docs/images/guitar-scale-lab.png)
+
+![Guitar Scale Lab - D Major](./docs/images/guitar-scale-lab-d-major.png)
 
 ## はじめに: 本文で使う音楽用語
 
